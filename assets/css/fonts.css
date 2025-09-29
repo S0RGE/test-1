@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'PTRootUIWebVF';
+  src: 
+    url('~/assets/fonts/pt-root-ui_vf.woff2') format('woff2'),
+    url('~/assets/fonts/pt-root-ui_vf.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  font-family: 'PTRootUIWebVF', sans-serif;
+}
