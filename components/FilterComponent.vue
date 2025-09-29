@@ -1,9 +1,16 @@
 <template>
   <div class="apartments-filter">
     <div class="apartments-filter__rooms">
-      <app-button rounded>1к</app-button>
-      <app-button append-icon="cross">2к</app-button>
-      <app-button rounded icon="arrow-up"></app-button>
+      <app-button rounded plain>1к</app-button>
+      <app-button append-icon="cross" plain>Сбросить параметры</app-button>
+      <app-button>Загрузить еще</app-button>
+      <app-button
+        rounded
+        plain
+        icon="arrow-up"
+        classes="app-button--up"
+      ></app-button>
+      <app-range-selection :min="0" :max="100" :model-value="rangeValue" />
     </div>
     <div class="apartments-filter__price"></div>
     <div class="apartments-filter__area"></div>
@@ -13,6 +20,11 @@
 
 <script setup lang="ts">
 import AppButton from "~/components/ui/Buttons/AppButton.vue";
+import AppRangeSelection, {
+  type IRangeSelection,
+} from "~/components/ui/AppRangeSelection.vue";
+
+const rangeValue = ref<IRangeSelection>([30, 60]);
 </script>
 
 <style lang="scss">

@@ -1,8 +1,8 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt'],
-  css: ['~/assets/css/fonts.css', '~/assets/css/colors.css'],
+  modules: ["@pinia/nuxt"],
+  css: ["~/assets/css/index.css"],
   typescript: {
-    strict: true
-  }
-})
+    strict: true,
+  },
+});

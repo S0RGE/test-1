@@ -5,7 +5,7 @@
         <AppIcons :name="icon" />
       </span>
     </slot>
-    <span v-if="appendIcon" class="app-button__icon--append">
+    <span v-if="appendIcon" class="app-button__icon app-button__icon--append">
       <AppIcons :name="appendIcon" />
     </span>
   </button>
@@ -23,12 +23,19 @@ interface IProps {
   icon?: TIconName;
   appendIcon?: TIconName;
   active?: boolean;
+  classes?: string | string[];
 }
 
 const props = defineProps<IProps>();
 
 const buttonClasses = computed(() => {
   const classes = ["app-button"];
+
+  if (typeof props.classes === "string") {
+    classes.push(props.classes);
+  } else if (Array.isArray(props.classes)) {
+    classes.push(...props.classes);
+  }
 
   if (props.active) {
     classes.push("app-button--active");
@@ -53,9 +60,12 @@ const buttonClasses = computed(() => {
 <style lang="scss">
 .app-button {
   cursor: pointer;
-  border: none;
   background-color: var(--base-bg-color);
   color: var(--main-font-color);
+
+  border: 1px solid #0b173933;
+  border-radius: 25px;
+  padding: 8px 24px;
 
   transition: all 0.1s ease-in-out;
 
@@ -67,22 +77,37 @@ const buttonClasses = computed(() => {
   &--primary {
     background-color: var(--primary-color);
     color: var(--light-font-color);
+
+    svg {
+      path {
+        stroke: var(--light-font-color);
+      }
+    }
   }
 
   &--primary.app-button--active {
     background-color: var(--base-bg-color);
     color: var(--main-font-color);
+
+    svg {
+      path {
+        stroke: var(--main-font-color);
+      }
+    }
   }
 
   // Round
   &--rounded {
     border-radius: 50%;
     padding: 10px 12px;
+
+    width: 40px;
+    height: 40px;
   }
 
   // Plain
   &--plain {
-    background: transparent;
+    border: none;
   }
 
   // Icon

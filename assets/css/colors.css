@@ -1,6 +1,9 @@
 :root {
   --primary-color: #3eb57c;
+  --light-green-color: #95d0a1;
   --main-font-color: #0b1739;
   --light-font-color: #ffffff;
   --base-bg-color: #ffffff;
+  /* TODO: fix color */
+  --light-gray-color: #dfdbdb;
 }

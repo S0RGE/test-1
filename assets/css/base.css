@@ -1,0 +1,24 @@
+* {
+  font-family: "PTRootUIWebVF", sans-serif;
+}
+
+/* App button UP */
+.app-button.app-button--up {
+  background-color: var(--light-green-color);
+}
+
+.app-button.app-button--up .app-button__icon svg path {
+  stroke: var(--light-font-color);
+}
+
+/* Remove arrows from number input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
