@@ -1,5 +1,8 @@
 <template>
   <div class="range-selection">
+    <div class="range-selection__title" v-if="title">
+      <span>{{ title }}</span>
+    </div>
     <div class="range-selection__inputs">
       <label class="range-selection__input-label">
         <span>От</span>
@@ -48,12 +51,13 @@
 </template>
 
 <script setup lang="ts">
-export type IRangeSelection = [number, number];
+import type { IRangeSelection } from "~/components/ui/RangeSelector/types";
 
 interface IProps {
   min: number;
   max: number;
   modelValue: IRangeSelection;
+  title?: string;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -68,14 +72,20 @@ const minValue = ref(props.modelValue[0]);
 const maxValue = ref(props.modelValue[1]);
 
 const updateRange = () => {
+  if (minValue.value > maxValue.value) {
+    return emit("update:modelValue", [maxValue.value, minValue.value]);
+  }
   emit("update:modelValue", [minValue.value, maxValue.value]);
 };
 
 const rangeStyle = computed(() => {
-  const minPercent =
-    ((minValue.value - props.min) / (props.max - props.min)) * 100;
-  const maxPercent =
-    ((maxValue.value - props.min) / (props.max - props.min)) * 100;
+  const minmax =
+    minValue.value > maxValue.value
+      ? [maxValue.value, minValue.value]
+      : [minValue.value, maxValue.value];
+
+  const minPercent = ((minmax[0]! - props.min) / (props.max - props.min)) * 100;
+  const maxPercent = ((minmax[1]! - props.min) / (props.max - props.min)) * 100;
   return {
     left: `${minPercent}%`,
     width: `${maxPercent - minPercent}%`,
@@ -85,6 +95,13 @@ const rangeStyle = computed(() => {
 
 <style lang="scss">
 .range-selection {
+  &__title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+  }
+
   &__slider-container {
     position: relative;
     margin-bottom: 1rem;

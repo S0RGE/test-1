@@ -10,7 +10,12 @@
         icon="arrow-up"
         classes="app-button--up"
       ></app-button>
-      <app-range-selection :min="0" :max="100" :model-value="rangeValue" />
+      <app-range-selection
+        title="Стоимость квартиры, ₽"
+        :min="0"
+        :max="100"
+        :model-value="rangeValue"
+      />
     </div>
     <div class="apartments-filter__price"></div>
     <div class="apartments-filter__area"></div>
@@ -19,12 +24,12 @@
 </template>
 
 <script setup lang="ts">
-import AppButton from "~/components/ui/Buttons/AppButton.vue";
+import AppButton from "~/components/ui/Buttons/";
 import AppRangeSelection, {
   type IRangeSelection,
-} from "~/components/ui/AppRangeSelection.vue";
+} from "~/components/ui/RangeSelector";
 
-const rangeValue = ref<IRangeSelection>([30, 60]);
+const rangeValue = ref<IRangeSelection>([30, 40]);
 </script>
 
 <style lang="scss">
