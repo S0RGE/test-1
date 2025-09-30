@@ -1,0 +1,74 @@
+[
+  {
+    "imageLink": "https://example.com/apartment1.jpg",
+    "name": "3-комнатная №104",
+    "square": 63.1,
+    "flor": 3,
+    "maxFlor": 17,
+    "price": 6630500
+  },
+  {
+    "imageLink": "https://example.com/apartment2.jpg",
+    "name": "3-комнатная №105",
+    "square": 63.2,
+    "flor": 7,
+    "maxFlor": 17,
+    "price": 6650759
+  },
+  {
+    "imageLink": "https://example.com/apartment3.jpg",
+    "name": "3-комнатная №106",
+    "square": 63.6,
+    "flor": 15,
+    "maxFlor": 17,
+    "price": 6620500
+  },
+  {
+    "imageLink": "https://example.com/apartment3.jpg",
+    "name": "3-комнатная №107",
+    "square": 63.3,
+    "flor": 15,
+    "maxFlor": 17,
+    "price": 6130500
+  },
+  {
+    "imageLink": "https://example.com/apartment3.jpg",
+    "name": "3-комнатная №108",
+    "square": 63.3,
+    "flor": 1,
+    "maxFlor": 17,
+    "price": 6030500
+  },
+  {
+    "imageLink": "https://example.com/apartment3.jpg",
+    "name": "2-комнатная №100",
+    "square": 43.4,
+    "flor": 5,
+    "maxFlor": 17,
+    "price": 4630500
+  },
+  {
+    "imageLink": "https://example.com/apartment3.jpg",
+    "name": "2-комнатная №101",
+    "square": 43.2,
+    "flor": 3,
+    "maxFlor": 17,
+    "price": 4130500
+  },
+  {
+    "imageLink": "https://example.com/apartment3.jpg",
+    "name": "2-комнатная №102",
+    "square": 43.1,
+    "flor": 2,
+    "maxFlor": 17,
+    "price": 4430500
+  },
+  {
+    "imageLink": "https://example.com/apartment3.jpg",
+    "name": "2-комнатная №103",
+    "square": 43.8,
+    "flor": 8,
+    "maxFlor": 17,
+    "price": 4633500
+  }
+]
