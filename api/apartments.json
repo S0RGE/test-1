@@ -1,6 +1,7 @@
 [
   {
-    "imageLink": "https://example.com/apartment1.jpg",
+    "id": 1,
+    "imageLink": "./apartment-plan.png",
     "name": "3-комнатная №104",
     "square": 63.1,
     "flor": 3,
@@ -8,7 +9,8 @@
     "price": 6630500
   },
   {
-    "imageLink": "https://example.com/apartment2.jpg",
+    "id": 2,
+    "imageLink": "./apartment-plan.png",
     "name": "3-комнатная №105",
     "square": 63.2,
     "flor": 7,
@@ -16,7 +18,8 @@
     "price": 6650759
   },
   {
-    "imageLink": "https://example.com/apartment3.jpg",
+    "id": 3,
+    "imageLink": "./apartment-plan.png",
     "name": "3-комнатная №106",
     "square": 63.6,
     "flor": 15,
@@ -24,7 +27,8 @@
     "price": 6620500
   },
   {
-    "imageLink": "https://example.com/apartment3.jpg",
+    "id": 4,
+    "imageLink": "./apartment-plan.png",
     "name": "3-комнатная №107",
     "square": 63.3,
     "flor": 15,
@@ -32,7 +36,8 @@
     "price": 6130500
   },
   {
-    "imageLink": "https://example.com/apartment3.jpg",
+    "id": 5,
+    "imageLink": "./apartment-plan.png",
     "name": "3-комнатная №108",
     "square": 63.3,
     "flor": 1,
@@ -40,7 +45,8 @@
     "price": 6030500
   },
   {
-    "imageLink": "https://example.com/apartment3.jpg",
+    "id": 6,
+    "imageLink": "./apartment-plan.png",
     "name": "2-комнатная №100",
     "square": 43.4,
     "flor": 5,
@@ -48,7 +54,8 @@
     "price": 4630500
   },
   {
-    "imageLink": "https://example.com/apartment3.jpg",
+    "id": 7,
+    "imageLink": "./apartment-plan.png",
     "name": "2-комнатная №101",
     "square": 43.2,
     "flor": 3,
@@ -56,7 +63,8 @@
     "price": 4130500
   },
   {
-    "imageLink": "https://example.com/apartment3.jpg",
+    "id": 8,
+    "imageLink": "./apartment-plan.png",
     "name": "2-комнатная №102",
     "square": 43.1,
     "flor": 2,
@@ -64,7 +72,8 @@
     "price": 4430500
   },
   {
-    "imageLink": "https://example.com/apartment3.jpg",
+    "id": 9,
+    "imageLink": "./apartment-plan.png",
     "name": "2-комнатная №103",
     "square": 43.8,
     "flor": 8,

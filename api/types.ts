@@ -1,4 +1,5 @@
 export interface IApartment {
+  id: number;
   imageLink: string;
   name: string;
   square: number;
