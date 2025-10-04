@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import AppIcons, { type TIconName } from "~/components/ui/Icons";
+import AppIcons, { type TIconName } from '~/components/ui/Icons';
 
-export type TButtonTypes = "primary";
+export type TButtonTypes = 'primary';
 
 interface IProps {
   type?: TButtonTypes;
@@ -30,20 +30,20 @@ interface IProps {
 const props = defineProps<IProps>();
 
 const buttonClasses = computed(() => {
-  const classes = ["app-button"];
+  const classes = ['app-button'];
 
-  if (typeof props.classes === "string") {
+  if (typeof props.classes === 'string') {
     classes.push(props.classes);
   } else if (Array.isArray(props.classes)) {
     classes.push(...props.classes);
   }
 
   if (props.active) {
-    classes.push("app-button--active");
+    classes.push('app-button--active');
   }
 
   if (props.text) {
-    classes.push("app-button--text");
+    classes.push('app-button--text');
   }
 
   if (props.type) {
@@ -51,14 +51,14 @@ const buttonClasses = computed(() => {
   }
 
   if (props.rounded) {
-    classes.push("app-button--rounded");
+    classes.push('app-button--rounded');
   }
 
   if (props.plain) {
-    classes.push("app-button--plain");
+    classes.push('app-button--plain');
   }
 
-  return classes.concat(" ");
+  return classes.concat(' ');
 });
 </script>
 

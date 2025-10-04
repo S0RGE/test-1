@@ -13,7 +13,7 @@
           :min="min"
           :max="max"
           @input="updateRange"
-        >
+        />
       </label>
       <label>
         <span class="range-selection__input-label">До</span>
@@ -24,12 +24,12 @@
           :min="min"
           :max="max"
           @input="updateRange"
-        >
+        />
       </label>
     </div>
     <div class="range-selection__slider-container">
-      <div class="range-selection__track"/>
-      <div class="range-selection__range" :style="rangeStyle"/>
+      <div class="range-selection__track" />
+      <div class="range-selection__range" :style="rangeStyle" />
       <input
         v-model="minValue"
         type="range"
@@ -37,7 +37,7 @@
         :max="max"
         class="slider min-slider"
         @input="updateRange"
-      >
+      />
       <input
         v-model="maxValue"
         type="range"
@@ -45,18 +45,18 @@
         :max="max"
         class="slider max-slider"
         @input="updateRange"
-      >
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { IRangeSelection } from "~/components/ui/RangeSelector/types";
+import type { IRangeSelection } from '~/components/ui/RangeSelector/types';
 
 interface IProps {
-  min: number;
-  max: number;
-  modelValue: IRangeSelection;
+  min?: number;
+  max?: number;
+  modelValue?: IRangeSelection;
   title?: string;
 }
 
@@ -64,18 +64,19 @@ const props = withDefaults(defineProps<IProps>(), {
   min: 0,
   max: 100,
   modelValue: () => [20, 60],
+  title: '',
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 const minValue = ref(props.modelValue[0]);
 const maxValue = ref(props.modelValue[1]);
 
 const updateRange = () => {
   if (minValue.value > maxValue.value) {
-    return emit("update:modelValue", [maxValue.value, minValue.value]);
+    return emit('update:modelValue', [maxValue.value, minValue.value]);
   }
-  emit("update:modelValue", [minValue.value, maxValue.value]);
+  emit('update:modelValue', [minValue.value, maxValue.value]);
 };
 
 const rangeStyle = computed(() => {
