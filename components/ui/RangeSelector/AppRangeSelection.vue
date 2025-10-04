@@ -1,6 +1,6 @@
 <template>
   <div class="range-selection">
-    <div class="range-selection__title" v-if="title">
+    <div v-if="title" class="range-selection__title">
       <span>{{ title }}</span>
     </div>
     <div class="range-selection__inputs">
@@ -13,7 +13,7 @@
           :min="min"
           :max="max"
           @input="updateRange"
-        />
+        >
       </label>
       <label>
         <span class="range-selection__input-label">До</span>
@@ -24,28 +24,28 @@
           :min="min"
           :max="max"
           @input="updateRange"
-        />
+        >
       </label>
     </div>
     <div class="range-selection__slider-container">
-      <div class="range-selection__track"></div>
-      <div class="range-selection__range" :style="rangeStyle"></div>
+      <div class="range-selection__track"/>
+      <div class="range-selection__range" :style="rangeStyle"/>
       <input
         v-model="minValue"
         type="range"
         :min="min"
         :max="max"
-        @input="updateRange"
         class="slider min-slider"
-      />
+        @input="updateRange"
+      >
       <input
         v-model="maxValue"
         type="range"
         :min="min"
         :max="max"
-        @input="updateRange"
         class="slider max-slider"
-      />
+        @input="updateRange"
+      >
     </div>
   </div>
 </template>

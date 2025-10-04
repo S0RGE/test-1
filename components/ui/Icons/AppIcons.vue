@@ -35,8 +35,8 @@
 </template>
 
 <script setup lang="ts">
-import { type TButtonTypes } from "~/components/ui/Buttons/AppButton.vue";
-import { type TIconName } from "~/components/ui/Icons/types";
+import type { TButtonTypes } from "~/components/ui/Buttons/AppButton.vue";
+import type { TIconName } from "~/components/ui/Icons/types";
 
 interface IProps {
     type?: TButtonTypes;

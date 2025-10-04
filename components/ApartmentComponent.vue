@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { type IApartment } from "~/api";
+import type { IApartment } from "~/api";
 
 interface IProps {
   apartments: IApartment[];

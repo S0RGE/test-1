@@ -9,7 +9,7 @@
         plain
         icon="arrow-up"
         classes="app-button--up"
-      ></app-button>
+      />
       <app-range-selection
         title="Стоимость квартиры, ₽"
         :min="0"
@@ -17,9 +17,9 @@
         :model-value="rangeValue"
       />
     </div>
-    <div class="apartments-filter__price"></div>
-    <div class="apartments-filter__area"></div>
-    <div class="apartments-filter__actions"></div>
+    <div class="apartments-filter__price"/>
+    <div class="apartments-filter__area"/>
+    <div class="apartments-filter__actions"/>
   </div>
 </template>
 
