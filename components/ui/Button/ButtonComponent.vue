@@ -2,17 +2,17 @@
   <button :class="buttonClasses">
     <slot>
       <span v-if="icon" class="app-button__icon">
-        <AppIcons :name="icon" />
+        <ui-icon :name="icon" />
       </span>
     </slot>
     <span v-if="appendIcon" class="app-button__icon app-button__icon--append">
-      <AppIcons :name="appendIcon" />
+      <ui-icon :name="appendIcon" />
     </span>
   </button>
 </template>
 
 <script setup lang="ts">
-import AppIcons, { type TIconName } from '~/components/ui/Icons';
+import type { TIconName } from '~/components/ui/Icon';
 
 export type TButtonTypes = 'primary';
 

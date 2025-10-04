@@ -1,11 +1,11 @@
 <template>
   <div class="apartments-filter">
     <div class="apartments-filter__rooms">
-      <app-button rounded plain>1к</app-button>
-      <app-button append-icon="cross" plain text>Сбросить параметры</app-button>
-      <app-button>Загрузить еще</app-button>
-      <app-button rounded plain icon="arrow-up" classes="app-button--up" />
-      <app-range-selection
+      <ui-button rounded plain>1к</ui-button>
+      <ui-button append-icon="cross" plain text>Сбросить параметры</ui-button>
+      <ui-button>Загрузить еще</ui-button>
+      <ui-button rounded plain icon="arrow-up" classes="app-button--up" />
+      <ui-range-selector
         title="Стоимость квартиры, ₽"
         :min="0"
         :max="100"
@@ -19,12 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import AppButton from '~/components/ui/Buttons/'
-import AppRangeSelection, {
-  type IRangeSelection,
-} from '~/components/ui/RangeSelector'
+import type { IRangeSelection } from '~/components/ui/RangeSelector';
 
-const rangeValue = ref<IRangeSelection>([30, 40])
+const rangeValue = ref<IRangeSelection>([30, 40]);
 </script>
 
 <style lang="scss">

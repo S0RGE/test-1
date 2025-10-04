@@ -1,5 +1,5 @@
-import AppRangeSelection from "./AppRangeSelection.vue";
+import AppRangeSelection from './RangeSelectorComponent.vue';
 
 export default AppRangeSelection;
 
-export * from "./types";
+export * from './types';
