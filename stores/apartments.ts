@@ -10,6 +10,20 @@ export const useApartmentStore = defineStore('apartmentStore', () => {
     areaRange: null as [number, number] | null,
   });
 
+  const currentPage = ref(1);
+  const itemsPerPage = ref(5);
+
+  const displayedApartments = computed(() => {
+    return filteredApartments.value.slice(
+      0,
+      currentPage.value * itemsPerPage.value
+    );
+  });
+
+  const hasMore = computed(() => {
+    return displayedApartments.value.length < filteredApartments.value.length;
+  });
+
   const getApartments = () => {
     apartments.value = getAllApartments();
   };
@@ -45,10 +59,13 @@ export const useApartmentStore = defineStore('apartmentStore', () => {
   const filteredApartments = computed(() => {
     return apartments.value.filter((apartment) => {
       // Room filter
-      if (filters.value.rooms.length > 0 && !filters.value.rooms.includes(apartment.rooms)) {
+      if (
+        filters.value.rooms.length > 0 &&
+        !filters.value.rooms.includes(apartment.rooms)
+      ) {
         return false;
       }
-      
+
       // Price filter
       if (filters.value.priceRange) {
         const [minPrice, maxPrice] = filters.value.priceRange;
@@ -56,7 +73,7 @@ export const useApartmentStore = defineStore('apartmentStore', () => {
           return false;
         }
       }
-      
+
       // Area filter
       if (filters.value.areaRange) {
         const [minArea, maxArea] = filters.value.areaRange;
@@ -64,17 +81,18 @@ export const useApartmentStore = defineStore('apartmentStore', () => {
           return false;
         }
       }
-      
+
       return true;
     });
   });
 
   return {
     getApartments,
-    apartments,
-    filteredApartments,
-    filters,
     setFilters,
+    currentPage,
+    displayedApartments,
+    filters,
+    hasMore,
     priceRange,
     roomsRange,
     squareRange,

@@ -51,7 +51,7 @@
   },
   {
     "id": 6,
-    "rooms": 3,
+    "rooms": 2,
     "imageLink": "./apartment-plan.png",
     "name": "2-комнатная №100",
     "square": 43.4,
@@ -94,6 +94,26 @@
     "rooms": 1,
     "imageLink": "./apartment-plan.png",
     "name": "1-комнатная №104",
+    "square": 43.8,
+    "floor": 8,
+    "maxFlor": 17,
+    "price": 4633500
+  },
+  {
+    "id": 10,
+    "rooms": 1,
+    "imageLink": "./apartment-plan.png",
+    "name": "1-комнатная №105",
+    "square": 43.8,
+    "floor": 8,
+    "maxFlor": 17,
+    "price": 4633500
+  },
+  {
+    "id": 10,
+    "rooms": 1,
+    "imageLink": "./apartment-plan.png",
+    "name": "1-комнатная №106",
     "square": 43.8,
     "floor": 8,
     "maxFlor": 17,

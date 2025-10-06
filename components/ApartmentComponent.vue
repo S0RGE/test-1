@@ -1,7 +1,10 @@
 <template>
   <div class="apartment-component">
     <h1 class="apartment-component__title">Квартиры</h1>
-    <ui-table :data="displayedApartments" :columns="columns" />
+    <div v-if="!displayedApartments.length">
+      <h3>Нет квартир с заданным фильтром</h3>
+    </div>
+    <ui-table v-else :data="displayedApartments" :columns="columns" />
     <div class="apartment-component__load-more">
       <ui-button
         v-if="hasMore"
@@ -15,7 +18,8 @@
 
 <script setup lang="ts">
 const apartmentStore = useApartmentStore();
-const { filteredApartments } = storeToRefs(apartmentStore);
+const { hasMore, currentPage, displayedApartments } =
+  storeToRefs(apartmentStore);
 
 const columns = [
   { key: 'imageLink', label: 'Планировка' },
@@ -24,17 +28,6 @@ const columns = [
   { key: 'floor', label: 'Этаж', sortable: true },
   { key: 'price', label: 'Цена ₽', sortable: true },
 ];
-
-const currentPage = ref(1);
-const itemsPerPage = 5;
-
-const displayedApartments = computed(() => {
-  return filteredApartments.value.slice(0, currentPage.value * itemsPerPage);
-});
-
-const hasMore = computed(() => {
-  return displayedApartments.value.length < filteredApartments.value.length;
-});
 
 const loadMore = () => {
   currentPage.value++;
