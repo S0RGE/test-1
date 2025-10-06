@@ -1,5 +1,5 @@
 <template>
-  <button :class="buttonClasses">
+  <button :class="buttonClasses" :disabled="disabled">
     <slot>
       <span v-if="icon" class="app-button__icon">
         <ui-icon :name="icon" />
@@ -24,6 +24,7 @@ interface IProps {
   appendIcon?: TIconName;
   active?: boolean;
   text?: boolean;
+  disabled?: boolean;
   classes?: string | string[];
 }
 
@@ -56,6 +57,10 @@ const buttonClasses = computed(() => {
 
   if (props.plain) {
     classes.push('app-button--plain');
+  }
+
+  if (props.disabled) {
+    classes.push('app-button--disabled');
   }
 
   return classes.concat(' ');
@@ -119,6 +124,13 @@ const buttonClasses = computed(() => {
   &--text {
     background-color: transparent;
     border: none;
+  }
+
+  // Disabled
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   // Icon

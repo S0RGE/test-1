@@ -1,23 +1,35 @@
 <template>
   <main class="main-page">
-    <apartment-component
-      :apartments="apartments"
-      class="main-page__apartments"
-    />
-    <filter-component class="main-page__filter" />
+    <div class="main-page__apartments">
+      <apartment-component :apartments="apartments" />
+    </div>
+    <div class="main-page__filter">
+      <filter-component />
+    </div>
+    <div v-if="showUpButton" class="main-page__up-button">
+      <ui-button rounded plain icon="arrow-up" classes="app-button--up" />
+    </div>
   </main>
 </template>
 
 <script lang="ts" setup>
-import ApartmentComponent from "~/components/ApartmentComponent.vue";
-import FilterComponent from "~/components/FilterComponent.vue";
-
 const appartmentStore = useApartmentStore();
 const { getApartments } = appartmentStore;
 const { apartments } = storeToRefs(appartmentStore);
 
+const showUpButton = ref(false);
+
+const handleScroll = () => {
+  showUpButton.value = window.scrollY > 100;
+};
+
 onMounted(() => {
   getApartments();
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
 });
 </script>
 
@@ -29,6 +41,12 @@ onMounted(() => {
 
   &__apartments {
     flex-grow: 2;
+  }
+
+  &__up-button {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
   }
 }
 </style>

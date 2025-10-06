@@ -1,8 +1,15 @@
 <template>
   <div class="apartment-component">
-    <h1 class="apartment-component__title">Apartments</h1>
+    <h1 class="apartment-component__title">Квартиры</h1>
     <ui-table :data="displayedApartments" :columns="columns" />
-    <ui-button v-if="hasMore" @click="loadMore">Загрузить еще</ui-button>
+    <div class="apartment-component__load-more">
+      <ui-button
+        v-if="hasMore"
+        class="apartment-component__load-more-btn"
+        @click="loadMore"
+        >Загрузить еще</ui-button
+      >
+    </div>
   </div>
 </template>
 
@@ -19,7 +26,7 @@ const columns = [
   { key: 'imageLink', label: 'Планировка' },
   { key: 'name', label: 'Квартира' },
   { key: 'square', label: 'S, м²', sortable: true },
-  { key: 'flor', label: 'Этаж', sortable: true },
+  { key: 'floor', label: 'Этаж', sortable: true },
   { key: 'price', label: 'Цена ₽', sortable: true },
 ];
 
@@ -49,18 +56,15 @@ const loadMore = () => {
   }
 
   &__load-more {
-    margin-top: 2rem;
-    padding: 0.75rem 1.5rem;
-    background: var(--primary-color, #007bff);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
+    margin-top: 48px;
+  }
 
-    &:hover {
-      background: var(--primary-color-hover, #0056b3);
-    }
+  &__load-more-btn {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: center;
   }
 }
 </style>

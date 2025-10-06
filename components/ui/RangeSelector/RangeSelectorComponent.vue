@@ -4,7 +4,9 @@
       <span>{{ title }}</span>
     </div>
     <div class="range-selection__inputs">
-      <label class="range-selection__input-label">
+      <label
+        class="range-selection__input-label range-selection__input-label--start"
+      >
         <span>От</span>
         <input
           v-model="minValue"
@@ -15,8 +17,10 @@
           @input="updateRange"
         />
       </label>
-      <label>
-        <span class="range-selection__input-label">До</span>
+      <label
+        class="range-selection__input-label range-selection__input-label--end"
+      >
+        <span>До</span>
         <input
           v-model="maxValue"
           class="range-selection__input"
@@ -63,33 +67,48 @@ interface IProps {
 const props = withDefaults(defineProps<IProps>(), {
   min: 0,
   max: 100,
-  modelValue: () => [20, 60],
   title: '',
+  modelValue: undefined,
 });
 
 const emit = defineEmits(['update:modelValue']);
 
-const minValue = ref(props.modelValue[0]);
-const maxValue = ref(props.modelValue[1]);
+const minValue = ref(props.modelValue?.[0] ?? props.min);
+const maxValue = ref(props.modelValue?.[1] ?? props.max);
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (newValue) {
+      minValue.value = newValue[0];
+      maxValue.value = newValue[1];
+    } else {
+      minValue.value = props.min;
+      maxValue.value = props.max;
+    }
+  },
+  { immediate: true }
+);
 
 const updateRange = () => {
-  if (minValue.value > maxValue.value) {
-    return emit('update:modelValue', [maxValue.value, minValue.value]);
-  }
-  emit('update:modelValue', [minValue.value, maxValue.value]);
+  const min = Math.max(props.min, Math.min(minValue.value, maxValue.value));
+  const max = Math.min(props.max, Math.max(minValue.value, maxValue.value));
+  emit('update:modelValue', [min, max]);
 };
 
 const rangeStyle = computed(() => {
-  const minmax =
-    minValue.value > maxValue.value
-      ? [maxValue.value, minValue.value]
-      : [minValue.value, maxValue.value];
+  const min = Math.max(props.min, Math.min(minValue.value, maxValue.value));
+  const max = Math.min(props.max, Math.max(minValue.value, maxValue.value));
 
-  const minPercent = ((minmax[0]! - props.min) / (props.max - props.min)) * 100;
-  const maxPercent = ((minmax[1]! - props.min) / (props.max - props.min)) * 100;
+  const range = props.max - props.min;
+  if (range === 0) return { left: '0%', width: '0%' };
+
+  const minPercent = ((min - props.min) / range) * 100;
+  const maxPercent = ((max - props.min) / range) * 100;
+
   return {
-    left: `${minPercent}%`,
-    width: `${maxPercent - minPercent}%`,
+    left: `${Math.max(0, minPercent)}%`,
+    width: `${Math.max(0, maxPercent - minPercent)}%`,
   };
 });
 </script>
@@ -150,22 +169,36 @@ const rangeStyle = computed(() => {
   &__inputs {
     display: flex;
     gap: 1rem;
+    width: 100%;
   }
   &__input,
   &__input:active,
   &__input:hover,
   &__input:focus {
-    width: 80px;
+    width: max-content;
+    min-width: 40px;
     border: none;
     outline: none;
     background-color: transparent;
     margin-left: 8px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
   }
 
   &__input-label {
+    display: flex;
+    align-items: center;
+    flex: 1;
     color: var(--light-gray-color);
-
     font-size: 16px;
+
+    &--start,
+    &--end {
+      justify-content: flex-start;
+    }
   }
 }
 </style>
