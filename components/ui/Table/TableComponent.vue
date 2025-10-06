@@ -7,7 +7,10 @@
           <th v-for="column in columns" :key="column.key" class="table__header">
             <button
               v-if="column.sortable"
-              class="table__sort-button"
+              :class="[
+                'table__sort-button',
+                { 'table__sort-button--active': sortKey === column.key },
+              ]"
               @click="toggleSort(column.key)"
             >
               {{ column.label }}
@@ -111,10 +114,6 @@ const sortedData = computed(() => {
   border-radius: 8px;
   overflow: hidden;
 
-  &__head {
-    // background: var(--bg-secondary, #f8f9fa);
-  }
-
   &__header {
     padding: 1rem;
     text-align: left;
@@ -135,6 +134,10 @@ const sortedData = computed(() => {
 
     &:hover {
       color: var(--text-primary, #1a1a1a);
+    }
+
+    &--active {
+      color: var(--primary-color, #3eb57c);
     }
   }
 

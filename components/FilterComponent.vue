@@ -84,6 +84,11 @@ const resetFilters = () => {
     rgba(149, 208, 161, 0.3) 100%
   );
 
+  @media screen and (max-width: 960px) {
+    width: 318px;
+    padding: 20px;
+  }
+
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -98,9 +103,6 @@ const resetFilters = () => {
     ui-range-selector {
       width: 100%;
     }
-  }
-
-  &__actions {
   }
 }
 </style>
