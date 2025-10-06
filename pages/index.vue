@@ -1,7 +1,7 @@
 <template>
   <main class="main-page">
     <div class="main-page__apartments">
-      <apartment-component :apartments="apartments" />
+      <apartment-component />
     </div>
     <div class="main-page__filter">
       <filter-component />
@@ -15,7 +15,6 @@
 <script lang="ts" setup>
 const appartmentStore = useApartmentStore();
 const { getApartments } = appartmentStore;
-const { apartments } = storeToRefs(appartmentStore);
 
 const showUpButton = ref(false);
 

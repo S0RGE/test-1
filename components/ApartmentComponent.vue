@@ -14,13 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import type { IApartment } from '~/api';
-
-interface IProps {
-  apartments: IApartment[];
-}
-
-const props = defineProps<IProps>();
+const apartmentStore = useApartmentStore();
+const { filteredApartments } = storeToRefs(apartmentStore);
 
 const columns = [
   { key: 'imageLink', label: 'Планировка' },
@@ -34,11 +29,11 @@ const currentPage = ref(1);
 const itemsPerPage = 5;
 
 const displayedApartments = computed(() => {
-  return props.apartments.slice(0, currentPage.value * itemsPerPage);
+  return filteredApartments.value.slice(0, currentPage.value * itemsPerPage);
 });
 
 const hasMore = computed(() => {
-  return displayedApartments.value.length < props.apartments.length;
+  return displayedApartments.value.length < filteredApartments.value.length;
 });
 
 const loadMore = () => {

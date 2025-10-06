@@ -47,6 +47,19 @@ const { priceRange, roomsRange, squareRange } = storeToRefs(appartmentStore);
 
 onMounted(() => {
   appartmentStore.getApartments();
+  
+  // Initialize filters from query params
+  if (route.query.rooms) {
+    selectedRooms.value = String(route.query.rooms).split(',').map(Number);
+  }
+  
+  if (route.query.priceMin && route.query.priceMax) {
+    selectedPrice.value = [Number(route.query.priceMin), Number(route.query.priceMax)];
+  }
+  
+  if (route.query.areaMin && route.query.areaMax) {
+    selectedArea.value = [Number(route.query.areaMin), Number(route.query.areaMax)];
+  }
 });
 
 const roomsFilter = ref<number[]>([1, 2, 3, 4]);
@@ -54,6 +67,9 @@ const roomsFilter = ref<number[]>([1, 2, 3, 4]);
 const isRoomInRange = (room: number) => {
   return roomsRange.value.min <= room && roomsRange.value.max >= room;
 };
+
+const route = useRoute();
+const router = useRouter();
 
 const selectedRooms = ref<number[]>([]);
 const selectRoom = (room: number) => {
@@ -65,6 +81,37 @@ const selectRoom = (room: number) => {
 };
 const selectedPrice = ref<IRangeSelection>();
 const selectedArea = ref<IRangeSelection>();
+
+const updateQueryParams = () => {
+  const query: Record<string, string> = {};
+  
+  if (selectedRooms.value.length > 0) {
+    query.rooms = selectedRooms.value.join(',');
+  }
+  
+  if (selectedPrice.value) {
+    query.priceMin = selectedPrice.value[0].toString();
+    query.priceMax = selectedPrice.value[1].toString();
+  }
+  
+  if (selectedArea.value) {
+    query.areaMin = selectedArea.value[0].toString();
+    query.areaMax = selectedArea.value[1].toString();
+  }
+  
+  router.push({ query });
+};
+
+watch([selectedRooms, selectedPrice, selectedArea], () => {
+  updateQueryParams();
+  
+  // Update store filters
+  appartmentStore.setFilters({
+    rooms: selectedRooms.value,
+    priceRange: selectedPrice.value || null,
+    areaRange: selectedArea.value || null,
+  });
+}, { deep: true });
 
 const resetFilters = () => {
   selectedRooms.value = [];
