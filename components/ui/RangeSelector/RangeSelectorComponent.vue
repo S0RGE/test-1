@@ -35,18 +35,20 @@
       <div class="range-selection__track" />
       <div class="range-selection__range" :style="rangeStyle" />
       <input
-        v-model="minValue"
+        v-model.number="minValue"
         type="range"
         :min="min"
         :max="max"
+        :step="step"
         class="slider min-slider"
         @input="updateRange"
       />
       <input
-        v-model="maxValue"
+        v-model.number="maxValue"
         type="range"
         :min="min"
         :max="max"
+        :step="step"
         class="slider max-slider"
         @input="updateRange"
       />
@@ -62,19 +64,21 @@ interface IProps {
   max?: number;
   modelValue?: IRangeSelection;
   title?: string;
+  step?: number;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
   min: 0,
   max: 100,
   title: '',
+  step: 1,
   modelValue: undefined,
 });
 
 const emit = defineEmits(['update:modelValue']);
 
-const minValue = ref(props.modelValue?.[0] ?? props.min);
-const maxValue = ref(props.modelValue?.[1] ?? props.max);
+const minValue = ref(Number(props.modelValue?.[0] ?? props.min));
+const maxValue = ref(Number(props.modelValue?.[1] ?? props.max));
 
 watch(
   () => props.modelValue,
@@ -91,24 +95,32 @@ watch(
 );
 
 const updateRange = () => {
-  const min = Math.max(props.min, Math.min(minValue.value, maxValue.value));
-  const max = Math.min(props.max, Math.max(minValue.value, maxValue.value));
+  let min = Number(minValue.value);
+  let max = Number(maxValue.value);
+
+  if (min > max) {
+    min = max;
+    minValue.value = min;
+  }
+
+  if (max < min) {
+    max = min;
+    maxValue.value = max;
+  }
+
   emit('update:modelValue', [min, max]);
 };
 
 const rangeStyle = computed(() => {
-  const min = Math.max(props.min, Math.min(minValue.value, maxValue.value));
-  const max = Math.min(props.max, Math.max(minValue.value, maxValue.value));
-
   const range = props.max - props.min;
   if (range === 0) return { left: '0%', width: '0%' };
 
-  const minPercent = ((min - props.min) / range) * 100;
-  const maxPercent = ((max - props.min) / range) * 100;
+  const minPercent = ((minValue.value - props.min) / range) * 100;
+  const maxPercent = ((maxValue.value - props.min) / range) * 100;
 
   return {
-    left: `${Math.max(0, minPercent)}%`,
-    width: `${Math.max(0, maxPercent - minPercent)}%`,
+    left: `${minPercent}%`,
+    width: `${maxPercent - minPercent}%`,
   };
 });
 </script>
@@ -134,6 +146,11 @@ const rangeStyle = computed(() => {
       appearance: none;
       background: transparent;
       height: 16px;
+      z-index: 1;
+    }
+
+    .max-slider {
+      z-index: 2;
     }
 
     .slider::-webkit-slider-thumb {
